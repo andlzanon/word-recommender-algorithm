@@ -80,13 +80,11 @@ k_values = [2, 5, 10, 15]
 n_values = [10]
 
 f = open("map_item_knn.txt", "w")
-f.write("--- ITEM-KNN RESULTS ---")
+f.write("--- ITEM-KNN RESULTS ---\n")
 print("--- ITEM-KNN RESULTS ---")
-f.close()
 for k in k_values:
     for n in n_values:
-        f = open("map_item_knn.txt", "w")
         map_value = generate_map(n, k, user_item, jac_sim, users, test_data)
-        f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value))
-        print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value))
-        f.close()
+        f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
+        print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
+f.close()

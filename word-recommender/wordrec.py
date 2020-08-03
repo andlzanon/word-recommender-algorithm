@@ -142,11 +142,11 @@ k_values = [2, 5, 10, 15]
 n_values = [10]
 
 f = open("map_word_rec.txt", "w")
-f.write("--- WORD-RECOMMENDER RESULTS ---")
+f.write("--- WORD-RECOMMENDER RESULTS ---\n")
 print("--- WORD-RECOMMENDER RESULTS ---")
 for k in k_values:
     for n in n_values:
         map_value = generate_map(n, k, user_item, semantic_sim, users, test_data)
-        f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value))
-        print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value))
+        f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
+        print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
 f.close()
