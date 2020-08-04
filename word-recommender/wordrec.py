@@ -4,19 +4,66 @@ import nltk
 from nltk.corpus import wordnet as wn
 import os.path
 
+'''
+def calculate_prediction:
+    This function computes the estipulated prediction described
+    in formulae 3 of the present article; given a user 'u', 
+    and a item 'i', not already ranked by the user, this function
+    computes a prediction value about how the user 'u', after 
+    interacting with item 'i', would have ranked the item 'i'.
+
+    Given the k-most similar items to 'i', the metrics involved to
+    generate this prediciton consists of the sum of the similarity
+    between item 'i' and a item 'j'; 'j' is defined as an item 
+    included in the'k-most similar' set to 'i', and 'j' must have
+    been already ranked by the user 'u'.
+
+    
+'''
 
 def calculate_prediction(k, movie, profile, sim_m):
     n = 0
     i = 0
     total = 0
 
+    # DataFrame.loc[] 
+    # Note that contrary to usual python slices, both the start and the stop are included
+   
+    # below, the .loc methos selects the line referring to the movie passed by parameter 
+    # to this function; all the columns are sliced from the similarity matrix;
+    # "sim" can be represented as: 
+    #
+    #                               movie 1       movie 2       ...    movie n
+    # movie (passed by parameter)   value_1       value_2        ...    value_n
+
+    # movie 1       value_1
+    # movie 2       value_2
+    # .
+    # .
+    # .
+    # movie n       value_n
+
     sim = sim_m.loc[movie][:]
+
+    # since it's not desired to include the similarity between a movie and itself,
+    # 0 must be atributted as similarity value:
     sim.loc[movie] = 0
+
+    # the dataframe 'sim' is sorted in descending order (from highest to lowest),
+    # since is desired to iterate untill the k-highest similarities
     sim = sim.sort_values(ascending=False)
+    
     while n < k and i < len(sim) - 1:
         neig = sim.index[i]
+
+        #if 'neig' (the current movie being iterated) has already been seen by 
+        #the user, it's similarity is accumulated on 'total':
+
         if neig in profile.index:
             total = total + sim.iloc[i]
+            #if the movie ('neig') has already been seen, one more
+            #movie belongs to the "k-most similar" set,
+            #so, the variable 'n' is incremented by one.
             n = n + 1
         i = i + 1
 
@@ -26,6 +73,7 @@ def calculate_prediction(k, movie, profile, sim_m):
 def generate_map(number, k, user_item_m: pd.DataFrame, sim_m: pd.DataFrame, users_v: np.ndarray, test_data_m: pd.DataFrame):
     map_users = pd.DataFrame(index=users, columns=['map'])
     for u in users_v:
+        #only the row containing the u-th user is selected:
         u_row = user_item_m.loc[u][:]
         profile = u_row[u_row == 1]
         prediction = u_row[u_row == 0]
@@ -114,27 +162,73 @@ def generate_sim_matrix(n_aspects: int, user_item_m: pd.DataFrame):
     return sim_movies
 
 
+#if a floating point error occurs, an error is raised:
 np.seterr(all='raise')
+
 print("--- Generating User Item Matrix ---")
 used_columns = ['user_id', 'movie_id', 'rating']
+
+#below, 'train_data' is a chunk of the csv file that contains all the data;
+#in this chunk, only the data belonging to the columns 'user id', 'movie id' and 'rating' are
+#selected:
+
 train_data = pd.read_csv("../Base de Dados HetRec Arpit/train.csv", usecols=used_columns)
 
 # generate user/item matrix and mean item and transform it into interactions
+ 
 user_item = train_data.pivot(index="user_id", columns="movie_id", values="rating")
 user_item[user_item >= 0] = 1
+
+# if in the 'user_item' matrix has a value "not a number", 
+# it means that the user has never interacted with this item:
 user_item[user_item.isna()] = 0
 
+# so, as an example, 'user_item' is in the format below, with rows being the user_id
+# and columns being a movie:
+
+#               movie_id_1      Movie_id_2      ...
+# user id_x         1               1
+# user id_y         0               1
+# .
+# .
+# .
+
 print("--- Generating Similarity Matrix ---")
+
+# these two lines below must be not commented if you want to generat the similarity matrix:
 # sim_matrix = generate_sim_matrix(5, user_item)
 # sim_matrix.to_csv("sim_matrix.csv", mode='w', header=False, index=False)
+
 semantic_sim = pd.read_csv("./sim_matrix.csv", header=None)
 semantic_sim.index = user_item.columns
 semantic_sim.columns = user_item.columns
+# above, 'semantic_sim' is a dataframe in the format: 
+
+#              movie_id_1      movie_id_2
+# movie id_1
+# movie_id_2
+
 
 print("--- Generating Predictions and MAP ---")
+
+# below, 'test_data' is a chunk of the csv file that contains all the data;
+# in this chunk, only the data belonging to the columns 'user_id', 'movie id' and 'rating' are
+# selected:
+
 test_data = pd.read_csv("../Base de Dados HetRec Arpit/test.csv", usecols=used_columns)
+
+# below, 'users' is a numpy array containing all ids of all users;
+# the ids are sorted. As an example:
+# users = [id_1, id_2, id_3, ...]
+
 users = test_data.user_id.unique()
-users.sort()
+users.sort() #it doesn't change the original users array; 
+
+#Note: This method (sort) returns a copy of the array, leaving the original array unchanged.
+
+
+
+# the rows of the dataframe are users id:
 test_data.index = test_data.user_id
 
 
@@ -146,7 +240,17 @@ f.write("--- WORD-RECOMMENDER RESULTS ---\n")
 print("--- WORD-RECOMMENDER RESULTS ---")
 for k in k_values:
     for n in n_values:
+        #'users' is not sorted
         map_value = generate_map(n, k, user_item, semantic_sim, users, test_data)
         f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
         print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
 f.close()
+
+#with open("map_word_rec.txt", 'a+', encoding="utf-8") as f:
+#    print("--- WORD-RECOMMENDER RESULTS ---\n", file=f)
+#    for k in k_values:
+#        for n in n_values:
+#            map_value = generate_map(n, k, user_item, semantic_sim, users, test_data)
+#            print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n", file=f)
+#           print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n", file=f)
+
