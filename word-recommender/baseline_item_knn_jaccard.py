@@ -2,6 +2,7 @@ import math
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import pairwise_distances
+from sklearn.metrics.pairwise import cosine_similarity
 
 
 def calculate_prediction(k, movie, profile, sim_m):
@@ -66,14 +67,23 @@ user_item[user_item.isna()] = 0
 
 # generate similarity matrix
 print("--- Generating Similarity Matrix ---")
+
+# jaccard Sim Matrix
 jac_sim = 1 - pairwise_distances(user_item.T, metric="hamming")
 jac_sim = pd.DataFrame(jac_sim, index=user_item.columns, columns=user_item.columns)
+
+# pearson sim matrix
+# pearson_sim = user_item.corr('pearson')
+
+# cosine sim matrix
+# cosine_sim = cosine_similarity(user_item)
+
 
 # read data set and
 print("--- Generating Predictions and MAP ---")
 test_data = pd.read_csv("../Base de Dados HetRec Arpit/test.csv", usecols=used_columns)
 users = test_data.user_id.unique()
-users.sort()
+users = users.sort()
 test_data.index = test_data.user_id
 
 k_values = [2, 5, 10, 15]
