@@ -62,7 +62,9 @@ def calculate_prediction(k, movie, profile, sim_m):
 
 def generate_map(number: int, k: int, user_item_m: pd.DataFrame, sim_m: pd.DataFrame, users_v: np.ndarray,
                  test_data_m: pd.DataFrame):
+
     map_users = pd.DataFrame(index=users, columns=['map'])
+    map_users = map_users.sort_index()
     for u in users_v:
         # only the row containing the u-th user is selected:
         u_row = user_item_m.loc[u][:]
@@ -182,13 +184,12 @@ print("--- Generating Predictions and MAP ---")
 test_data = pd.read_csv("../Base de Dados HetRec Arpit/test.csv", usecols=used_columns)
 
 users = test_data.user_id.unique()
-users = users.sort()
 
 # the rows of the dataframe are users id:
 test_data.index = test_data.user_id
 
-k_values = [2, 5, 10, 15]
-n_values = [10]
+k_values = [2, 5, 10]
+n_values = [1, 5, 10]
 
 f = open("map_word_rec.txt", "w")
 f.write("--- WORD-RECOMMENDER RESULTS ---\n")

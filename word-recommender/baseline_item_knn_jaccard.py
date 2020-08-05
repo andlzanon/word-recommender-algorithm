@@ -1,4 +1,3 @@
-import math
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import pairwise_distances
@@ -25,6 +24,7 @@ def calculate_prediction(k, movie, profile, sim_m):
 
 def generate_map(number, k, user_item_m: pd.DataFrame, sim_m: pd.DataFrame, users_v: np.ndarray, test_data_m: pd.DataFrame):
     map_users = pd.DataFrame(index=users, columns=['map'])
+    map_users = map_users.sort_index()
     for u in users_v:
         u_row = user_item_m.loc[u][:]
         profile = u_row[u_row == 1]
@@ -83,11 +83,10 @@ jac_sim = pd.DataFrame(jac_sim, index=user_item.columns, columns=user_item.colum
 print("--- Generating Predictions and MAP ---")
 test_data = pd.read_csv("../Base de Dados HetRec Arpit/test.csv", usecols=used_columns)
 users = test_data.user_id.unique()
-users = users.sort()
 test_data.index = test_data.user_id
 
-k_values = [2, 5, 10, 15]
-n_values = [10]
+k_values = [2, 5, 10]
+n_values = [1, 5, 10]
 
 f = open("map_item_knn.txt", "w")
 f.write("--- ITEM-KNN RESULTS ---\n")
