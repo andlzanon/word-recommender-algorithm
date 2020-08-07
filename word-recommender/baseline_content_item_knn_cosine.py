@@ -68,16 +68,23 @@ user_item[user_item.isna()] = 0
 # generate similarity matrix
 print("--- Generating Similarity Matrix ---")
 
+# get movie aspect matrix and fill it with 0 instead of nan a
+aspect_movie_columns = ['aspect', 'score', 'movie_id']
+aspect_movie_data = pd.read_csv("./movie_aspects_matrix.csv")
+aspect_movie_data.columns = aspect_movie_columns
+movie_aspects_matrix = aspect_movie_data.pivot(index="movie_id", columns="aspect", values="score")
+movie_aspects_matrix = movie_aspects_matrix.fillna(0)
+
 # jaccard Sim Matrix
-jac_sim = 1 - pairwise_distances(user_item.T, metric="hamming")
-jac_sim = pd.DataFrame(jac_sim, index=user_item.columns, columns=user_item.columns)
+# jac_sim = 1 - pairwise_distances(user_item.T, metric="hamming")
+# jac_sim = pd.DataFrame(jac_sim, index=user_item.columns, columns=user_item.columns)
 
 # pearson sim matrix
-# pearson_sim = user_item.corr('pearson')
+# pearson_sim = movie_aspects_matrix.corr('pearson')
 
 # cosine sim matrix
-# cosine_sim = cosine_similarity(user_item)
-
+cosine_sim = cosine_similarity(movie_aspects_matrix)
+cosine_sim = pd.DataFrame(cosine_sim, index=user_item.columns, columns=user_item.columns)
 
 # read data set and
 print("--- Generating Predictions and MAP ---")
@@ -88,12 +95,12 @@ test_data.index = test_data.user_id
 k_values = [2, 5, 10]
 n_values = [1, 5, 10]
 
-f = open("map_item_knn_jaccard.txt", "w")
+f = open("map_content_item_knn_cosine.txt", "w")
 f.write("--- ITEM-KNN RESULTS ---\n")
 print("--- ITEM-KNN RESULTS ---")
 for k in k_values:
     for n in n_values:
-        map_value = generate_map(n, k, user_item, jac_sim, users, test_data)
+        map_value = generate_map(n, k, user_item, cosine_sim, users, test_data)
         f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
         print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
 f.close()

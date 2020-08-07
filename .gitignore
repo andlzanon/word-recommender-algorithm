@@ -4,3 +4,4 @@
 
 #sim-matrix
 /word-recommender/sim_matrix.csv
+/word-recommender/movie_aspects_matrix.csv
