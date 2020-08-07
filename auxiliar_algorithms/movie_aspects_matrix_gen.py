@@ -13,7 +13,7 @@ user_item = train_data.pivot(index="user_id", columns="movie_id", values="rating
 
 # create a new data frame with all top v aspects of all movies
 all_movie_aspects = pd.DataFrame(columns=['aspect', 'score', 'movie_id'])
-aspects_n = 50
+aspects_n = 25
 n = len(user_item.columns)
 for i in range(0, n):
     movie = user_item.columns[i]
