@@ -13,7 +13,7 @@ user_item = train_data.pivot(index="user_id", columns="movie_id", values="rating
 
 # create a new data frame with all top v aspects of all movies
 all_movie_aspects = pd.DataFrame(columns=['aspect', 'score', 'movie_id'])
-aspects_n = 25
+aspects_n = 5
 n = len(user_item.columns)
 for i in range(0, n):
     movie = user_item.columns[i]
@@ -25,5 +25,5 @@ for i in range(0, n):
 # transform into matrix and than to database
 movie_aspects_matrix = all_movie_aspects.pivot(index="movie_id", columns="aspect", values="score")
 # movie_aspects_matrix = movie_aspects_matrix.fillna(0)
-all_movie_aspects.to_csv('../word-recommender/movie_aspects_matrix.csv', mode='w', index=False, header=False,
+all_movie_aspects.to_csv('../word-recommender/movie_aspects_matrix_5.csv', mode='w', index=False, header=False,
                          columns=all_movie_aspects.columns.to_list())

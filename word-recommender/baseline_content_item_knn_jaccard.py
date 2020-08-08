@@ -70,7 +70,7 @@ print("--- Generating Similarity Matrix ---")
 
 # get movie aspect matrix and fill it with 0 instead of nan a
 aspect_movie_columns = ['aspect', 'score', 'movie_id']
-aspect_movie_data = pd.read_csv("./movie_aspects_matrix.csv")
+aspect_movie_data = pd.read_csv("./movie_aspects_matrix_5.csv")
 aspect_movie_data.columns = aspect_movie_columns
 movie_aspects_matrix = aspect_movie_data.pivot(index="movie_id", columns="aspect", values="score")
 movie_aspects_matrix[movie_aspects_matrix >= 0] = 1
