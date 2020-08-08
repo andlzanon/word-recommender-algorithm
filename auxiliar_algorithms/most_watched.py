@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+used_columns = ['user_id', 'movie_id', 'rating']
 train_data = pd.read_csv("../Base de Dados HetRec Arpit/train.csv", usecols=used_columns)
 
 # generate user/item matrix and mean item and transform it into interactions
@@ -35,3 +36,4 @@ for m in topn:
         
     imdb_id_vec.append(imbd_id_str)
 
+print("end")
