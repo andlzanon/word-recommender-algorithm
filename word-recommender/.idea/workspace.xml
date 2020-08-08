@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aef75371-dcfd-4129-b705-d1bf9bc94af3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auxiliar_algorithms/movie_aspects_matrix_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/../auxiliar_algorithms/movie_aspects_matrix_gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline_content_item_knn_cosine.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_content_item_knn_cosine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline_content_item_knn_jaccard.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_content_item_knn_jaccard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline_content_item_knn_pearson.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_content_item_knn_pearson.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_content_item_knn_cosine.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map_content_item_knn_cosine.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
