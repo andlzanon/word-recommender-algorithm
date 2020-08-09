@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aef75371-dcfd-4129-b705-d1bf9bc94af3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline_content_item_knn_cosine.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_content_item_knn_cosine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline_content_item_knn_jaccard.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_content_item_knn_jaccard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline_item_knn_jaccard.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_collaborative_item_knn_jaccard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline_tfidf.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline_tfidf.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content_map_item_knn_pearson.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_content_item_knn_cosine.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_25_Aspects/map_content_item_knn_cosine.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_content_item_knn_cosine_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_5_Aspects/map_content_item_knn_cosine_5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_content_item_knn_jaccard.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_25_Aspects/map_content_item_knn_jaccard.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_content_item_knn_jaccard_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_5_Aspects/map_content_item_knn_jaccard_5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_content_item_knn_pearson.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_25_Aspects/map_content_item_knn_pearson.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_item_knn_jac.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_tfidf.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Others/map_tfidf.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_word_rec.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_5_Aspects/map_word_rec_5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_word_rec_25.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_25_Aspects/map_word_rec_25.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wordrec.py" beforeDir="false" afterPath="$PROJECT_DIR$/wordrec.py" afterDir="false" />
-    </list>
+    <list default="true" id="aef75371-dcfd-4129-b705-d1bf9bc94af3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
