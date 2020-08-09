@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aef75371-dcfd-4129-b705-d1bf9bc94af3" name="Default Changelist" comment="" />
+    <list default="true" id="aef75371-dcfd-4129-b705-d1bf9bc94af3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Results_5_Aspects/map_content_item_knn_pearson_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Results_5_Aspects/map_content_item_knn_pearson_5.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
