@@ -172,12 +172,12 @@ user_item[user_item.isna()] = 0
 print("--- Generating Similarity Matrix ---")
 
 # these two lines below must be not commented if you want to generat the similarity matrix:
-# sim_matrix = generate_sim_matrix(5, user_item)
-# sim_matrix.to_csv("sim_matrix.csv", mode='w', header=False, index=False)
+sim_matrix = generate_sim_matrix(25, user_item)
+sim_matrix.to_csv("sim_matrix_25.csv", mode='w', header=False, index=False)
 
-semantic_sim = pd.read_csv("./sim_matrix.csv", header=None)
-semantic_sim.index = user_item.columns
-semantic_sim.columns = user_item.columns
+# semantic_sim = pd.read_csv("./sim_matrix.csv", header=None)
+# semantic_sim.index = user_item.columns
+# semantic_sim.columns = user_item.columns
 
 print("--- Generating Predictions and MAP ---")
 
@@ -191,13 +191,13 @@ test_data.index = test_data.user_id
 k_values = [2, 5, 10]
 n_values = [1, 5, 10]
 
-f = open("map_word_rec.txt", "w")
+f = open("map_word_rec_25.txt", "w")
 f.write("--- WORD-RECOMMENDER RESULTS ---\n")
 print("--- WORD-RECOMMENDER RESULTS ---")
 for k in k_values:
     for n in n_values:
         # 'users' is not sorted
-        map_value = generate_map(n, k, user_item, semantic_sim, users, test_data)
+        map_value = generate_map(n, k, user_item, sim_matrix, users, test_data)
         f.write("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
         print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
 f.close()
