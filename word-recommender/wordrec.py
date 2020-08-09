@@ -191,7 +191,7 @@ test_data.index = test_data.user_id
 k_values = [2, 5, 10]
 n_values = [1, 5, 10]
 
-f = open("map_word_rec_25.txt", "w")
+f = open("Results_25_Aspects/map_word_rec_25.txt", "w")
 f.write("--- WORD-RECOMMENDER RESULTS ---\n")
 print("--- WORD-RECOMMENDER RESULTS ---")
 for k in k_values:
@@ -202,7 +202,7 @@ for k in k_values:
         print("K = " + str(k) + " MAP@" + str(n) + " = " + str(map_value) + "\n")
 f.close()
 
-# with open("map_word_rec.txt", 'a+', encoding="utf-8") as f:
+# with open("map_word_rec_5.txt", 'a+', encoding="utf-8") as f:
 #    print("--- WORD-RECOMMENDER RESULTS ---\n", file=f)
 #    for k in k_values:
 #        for n in n_values:

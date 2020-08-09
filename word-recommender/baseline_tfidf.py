@@ -126,7 +126,7 @@ test_data.index = test_data.user_id
 k_values = [2, 5, 10]
 n_values = [1, 5, 10]
 
-f = open("map_tfidf.txt", "w")
+f = open("Others/map_tfidf.txt", "w")
 f.write("--- TFIDF-RECOMMENDER RESULTS ---\n")
 print("--- TFIDF-RECOMMENDER RESULTS ---")
 for k in k_values:

@@ -95,7 +95,7 @@ test_data.index = test_data.user_id
 k_values = [2, 5, 10]
 n_values = [1, 5, 10]
 
-f = open("map_content_item_knn_jaccard_5.txt", "w")
+f = open("Results_5_Aspects/map_content_item_knn_jaccard_5.txt", "w")
 f.write("--- ITEM-KNN RESULTS ---\n")
 print("--- ITEM-KNN RESULTS ---")
 for k in k_values:
