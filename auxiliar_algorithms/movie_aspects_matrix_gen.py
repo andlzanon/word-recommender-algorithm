@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
 
 # if a floating point error occurs, an error is raised:
 np.seterr(all='raise')
@@ -18,12 +19,19 @@ n = len(user_item.columns)
 for i in range(0, n):
     movie = user_item.columns[i]
     # get top v aspects, add the movie_id column and append to all
-    top_v_aspects = pd.read_csv("../aspects/movie_" + str(movie) + ".csv", usecols=['aspect', 'score']).sort_values('score', ascending=False)[:aspects_n]
+    top_v_aspects = pd.read_csv("../new_aspects/movie_" + str(movie) + ".csv", usecols=['aspect', 'score']).sort_values('score', ascending=False)[:aspects_n]
     top_v_aspects = top_v_aspects.assign(movie_id=[movie]*aspects_n)
     all_movie_aspects = all_movie_aspects.append(top_v_aspects)
 
 # transform into matrix and than to database
 movie_aspects_matrix = all_movie_aspects.pivot(index="movie_id", columns="aspect", values="score")
 # movie_aspects_matrix = movie_aspects_matrix.fillna(0)
-all_movie_aspects.to_csv('../word-recommender/movie_aspects_matrix_5.csv', mode='w', index=False, header=False,
-                         columns=all_movie_aspects.columns.to_list())
+# all_movie_aspects.to_csv('../word-recommender/movie_aspects_matrix_5.csv', mode='w', index=False, header=False,
+#                          columns=all_movie_aspects.columns.to_list())
+
+movie_aspects_matrix = movie_aspects_matrix.fillna(0)
+cosine_sim = cosine_similarity(movie_aspects_matrix)
+cosine_sim = pd.DataFrame(cosine_sim, index=user_item.columns, columns=user_item.columns)
+cosine_sim.to_csv('cosine_sim_matrix_5.csv', mode='w', index=False, header=False)
+
+print("end")
