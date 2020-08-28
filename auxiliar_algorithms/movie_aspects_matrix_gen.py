@@ -18,7 +18,7 @@ n = len(movies)
 for i in range(0, n):
     movie = movies[i]
     # get top v aspects, add the movie_id column and append to all
-    top_v_aspects = pd.read_csv("../tf_aspects/movie_" + str(movie) + ".csv", usecols=['aspect', 'score'])[:aspects_n]
+    top_v_aspects = pd.read_csv("../new_aspects/movie_" + str(movie) + ".csv", usecols=['aspect', 'score'])[:aspects_n]
     top_v_aspects = top_v_aspects.assign(movie_id=[movie]*aspects_n)
     all_movie_aspects = all_movie_aspects.append(top_v_aspects)
 
