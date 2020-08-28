@@ -20,7 +20,7 @@ print("--- Generating Similarity Matrix ---")
 
 # get movie aspect matrix and fill it with 0 instead of nan a
 aspect_movie_columns = ['aspect', 'score', 'movie_id']
-aspect_movie_data = pd.read_csv("older_matrixes/movie_aspects_matrix_5.csv")
+aspect_movie_data = pd.read_csv("movie_aspects_matrix_5.csv")
 aspect_movie_data.columns = aspect_movie_columns
 movie_aspects_matrix = aspect_movie_data.pivot(index="movie_id", columns="aspect", values="score")
 movie_aspects_matrix = movie_aspects_matrix.fillna(0)
@@ -45,7 +45,7 @@ test_data.index = test_data.user_id
 k_values = [2, 5, 10]
 n_values = [1, 5, 10]
 
-f = open("map_content_item_knn_pearson_5.txt", "w")
+f = open("/Final_Results/final_map_content_item_knn_pearson_5.txt", "w")
 f.write("--- ITEM-KNN RESULTS ---\n")
 print("--- ITEM-KNN RESULTS ---")
 for k in k_values:

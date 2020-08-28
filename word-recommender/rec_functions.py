@@ -50,6 +50,7 @@ def calculate_prediction(k, movie, profile, sim_m):
 
 
 def generate_map(number, k, user_item_m: pd.DataFrame, sim_m: pd.DataFrame, users_v: np.array, test_data_m: pd.DataFrame):
+    users_v.sort()
     map_users = pd.DataFrame(index=users_v, columns=['map'])
     map_users = map_users.sort_index()
     for u in users_v:
